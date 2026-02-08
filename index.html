@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shuaib's indiehacking page</title>
+  <style>
+    body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 1em;
+    }
+
+    section {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 2em;
+    }
+
+    aside {
+      width: 25%;
+      padding: 1em;
+      border-radius: 10px;
+      text-align: center;
+    }
+
+    #profile-pic {
+      border-radius: 50%;
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      margin-bottom: 1em;
+    }
+
+    #profile-name {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 1em;
+    }
+
+    #bio {
+      margin-top: 1em;
+      margin-bottom: 1em;
+    }
+
+   #location {
+      font-style: italic;
+      color: #555;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+    }
+
+    #location svg {
+      margin-right: 0.5em; /* Adjust spacing between icon and text */
+      fill: #555; /* Set icon color */
+    }
+
+
+    #social-links {
+      display: flex;
+      justify-content: center;
+      padding: 1em;
+    }
+
+    #social-links a {
+      text-decoration: none;
+      color: #333;
+      font-size: 1.5em;
+      padding: 10px;
+    }
+
+    main {
+      flex: 1;
+      padding: 1em;
+    }
+
+    .project-container {
+      display: flex;
+      gap: 1em;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+
+    .project {
+      display: flex; /* Added flex display */
+      width: calc(48% - 0.5em);
+      background-color: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+      cursor: pointer;
+      display: flex;
+      flex-direction: row; /* Changed to row */
+      text-decoration: none;
+      color: #333;
+      margin-bottom: 1em;
+    }
+
+    .project:hover {
+      transform: scale(1.05);
+    }
+
+    .project img {
+      width: 30px;
+      height: 30px;
+      object-fit: cover;
+      border-radius: 10px 10px 10px 10px;
+      border: 1px solid #000;
+    }
+
+    .project-details {
+      padding: 1em;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-icon {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      vertical-align: middle;
+      padding: 0.5em;
+    }
+
+    .project h3 {
+      margin-top: 0;
+      margin-bottom: 0.5em;
+    }
+
+    .project p {
+      margin: 0;
+    }
+
+    footer {
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      padding: 1em;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+
+    @media (max-width: 600px) {
+      section {
+        flex-direction: column;
+      }
+
+      aside {
+        width: 100%;
+      }
+
+      .project {
+        width: calc(100% - 1em);
+        margin-right: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section>
+    <aside>
+      <img id="profile-pic" src="shuaib.jpg" alt="Shuaib's Profile Photo">
+      <div id="profile-name">Shuaib Khan</div>
+      <div id="location">
+        <!-- SVG Path -->
+        <svg width="20" height="24" fill="currentColor"><path fill-rule="evenodd" d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z" clip-rule="evenodd"></path></svg>
+        <!-- Location Text -->
+        <span>London, U. K.</span>
+      </div>
+      
+      <div id="social-links">
+        <a href="mailto:shuaib@bytehood.com" target="_blank" rel="noopener noreferrer">
+           <svg width="24" height="24">
+         <path d="M18.821,20.5H5.179A3.683,3.683,0,0,1,1.5,16.821V7.179A3.683,3.683,0,0,1,5.179,3.5H18.821A3.683,3.683,0,0,1,22.5,7.179v9.642A3.683,3.683,0,0,1,18.821,20.5ZM5.179,4.5A2.682,2.682,0,0,0,2.5,7.179v9.642A2.682,2.682,0,0,0,5.179,19.5H18.821A2.682,2.682,0,0,0,21.5,16.821V7.179A2.682,2.682,0,0,0,18.821,4.5Z"></path><path d="M12,14.209a.5.5,0,0,1-.346-.138L4.286,7.028a.5.5,0,0,1,.691-.723L12,13.018l7.023-6.713a.5.5,0,1,1,.691.723l-7.368,7.043A.5.5,0,0,1,12,14.209Z"></path><path d="M4.7,17.833a.5.5,0,0,1-.347-.86l5.54-5.31a.5.5,0,0,1,.692.722L5.048,17.694A.5.5,0,0,1,4.7,17.833Z"></path><path d="M19.3,17.832a.5.5,0,0,1-.346-.139l-5.538-5.308a.5.5,0,0,1,.692-.722l5.538,5.308a.5.5,0,0,1-.346.861Z"></path></svg>
+        </a>
+
+      </div>
+    </aside>
+
+    <main>
+      <div class="project-container">
+        <a class="project" href="https://apps.apple.com/gb/app/a-step-a-day/id6468681996" target="_blank" rel="noopener noreferrer">
+        <div class="project-icon">
+          <img src="AStepADay-60.png" alt="A Step A Day">
+        </div>
+          <div class="project-details">
+            <h3>A Step A Day</h3>
+            <p>Create habits using streaks.</p>
+          </div>
+        </a>
+
+        <a class="project" href="https://apps.apple.com/gb/app/tweetai/id6471381750" target="_blank" rel="noopener noreferrer">
+          <div class="project-icon">
+          <img src="TweetAI-60.png" alt="TweetAI">
+        </div>
+          <div class="project-details">
+            <h3>TweetAI</h3>
+            <p>Let ChatGPT write your tweets for you.</p>
+          </div>
+        </a>
+
+ <a class="project" href="https://apps.apple.com/us/app/battery-alarm-app/id6472619156" target="_blank" rel="noopener noreferrer">
+          <div class="project-icon">
+          <img src="BatteryAlarm-60.png" alt="Battery Alarm App">
+        </div>
+          <div class="project-details">
+            <h3>Battery Alarm App</h3>
+            <p>Charge your iPhone battery optimally</p>
+          </div>
+        </a>
+
+      </div>
+    </main>
+  </section>
+
+  <footer>
+    &copy; 2024 Bytehood Ltd. All rights reserved.
+  </footer>
+</body>
+</html>
