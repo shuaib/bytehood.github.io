@@ -23,6 +23,102 @@
 <meta name="theme-color" content="#06060A">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
+<meta property="og:locale" content="en_GB">
+
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" as="image" href="assets/shots/home.jpg" fetchpriority="high">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://bytehood.com/#shuaib",
+      "name": "Shuaib Khan",
+      "jobTitle": "Independent iOS Developer",
+      "url": "https://bytehood.com/",
+      "image": "https://bytehood.com/assets/photo.jpg",
+      "email": "shuaib@bytehood.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "London",
+        "addressCountry": "GB"
+      },
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Bytehood Ltd"
+      },
+      "knowsAbout": [
+        "iOS development",
+        "Swift",
+        "App design",
+        "Screen time and digital wellbeing"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://bytehood.com/#website",
+      "url": "https://bytehood.com/",
+      "name": "Bytehood",
+      "inLanguage": "en-GB",
+      "publisher": {
+        "@id": "https://bytehood.com/#shuaib"
+      }
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://bytehood.com/#webpage",
+      "url": "https://bytehood.com/",
+      "name": "Shuaib Khan — Independent iOS Developer",
+      "isPartOf": {
+        "@id": "https://bytehood.com/#website"
+      },
+      "about": {
+        "@id": "https://bytehood.com/#shuaib"
+      },
+      "primaryImageOfPage": "https://bytehood.com/assets/og.jpg"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Disconnect",
+      "description": "Block distracting apps. Hand the key to a friend — only they can let you back in.",
+      "applicationCategory": "LifestyleApplication",
+      "operatingSystem": "iOS",
+      "url": "https://apps.apple.com/app/id6743134572",
+      "image": "https://bytehood.com/assets/icons/disconnect.png",
+      "author": {
+        "@id": "https://bytehood.com/#shuaib"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Trailblazer",
+      "description": "Build habits with streaks that stick.",
+      "applicationCategory": "HealthApplication",
+      "operatingSystem": "iOS",
+      "url": "https://apps.apple.com/app/id6468681996",
+      "image": "https://bytehood.com/assets/icons/trailblazer.png",
+      "author": {
+        "@id": "https://bytehood.com/#shuaib"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "Battery Alarm",
+      "description": "Charge your iPhone to exactly the right level.",
+      "applicationCategory": "UtilitiesApplication",
+      "operatingSystem": "iOS",
+      "url": "https://apps.apple.com/app/id6472619156",
+      "image": "https://bytehood.com/assets/icons/battery.png",
+      "author": {
+        "@id": "https://bytehood.com/#shuaib"
+      }
+    }
+  ]
+}
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap">
@@ -106,6 +202,9 @@ h1{
   opacity:0;pointer-events:none;transform:scale(.6);z-index:1;
   transition:transform .55s cubic-bezier(.22,.68,.36,1),opacity .45s ease;
 }
+/* No-JS fallback: without JS no slide gets a state class, so show the
+   first. Declared before the state rules so those win when JS runs. */
+.shot:first-of-type{opacity:1;z-index:3;transform:translateX(0) scale(1) rotate(0)}
 .shot.is-active{transform:translateX(0) scale(1) rotate(0);opacity:1;z-index:3;pointer-events:auto;cursor:default}
 .shot.is-next{transform:translateX(var(--fan)) scale(.74) rotate(7deg);opacity:.55;z-index:2;pointer-events:auto}
 .shot.is-prev{transform:translateX(calc(var(--fan)*-1)) scale(.74) rotate(-7deg);opacity:.55;z-index:2;pointer-events:auto}
@@ -199,7 +298,19 @@ h1{
 
       <div class="shots" id="carousel" role="group" tabindex="0"
            aria-roledescription="carousel" aria-label="Disconnect screenshots">
-        <div class="stack" id="stack"><div class="glow" aria-hidden="true"></div></div>
+        <div class="stack" id="stack">
+          <div class="glow" aria-hidden="true"></div>
+          <!-- Screenshots: add or remove an <img class="shot"> and everything adapts. -->
+          <img class="shot" src="assets/shots/home.jpg" width="750" height="1626" fetchpriority="high"
+               alt="Disconnect home screen listing active app blocks for social media, shopping and news"
+               data-caption="Disconnect &mdash; every block you have set, at a glance">
+          <img class="shot" src="assets/shots/lock.jpg" width="750" height="1629"
+               alt="Disconnect lock level picker, choosing how strict a block should be"
+               data-caption="Disconnect &mdash; pick how strict each block should be">
+          <img class="shot" src="assets/shots/approval.jpg" width="750" height="1626"
+               alt="Disconnect buddy approval request for unlocking a hard-locked app"
+               data-caption="Disconnect &mdash; on a hard lock, only your buddy can let you back in">
+        </div>
         <p class="caption" id="caption" aria-live="polite"></p>
         <div class="controls" id="controls">
           <button class="arrow" type="button" id="prev" aria-label="Previous screenshot">
@@ -270,34 +381,23 @@ h1{
 
 <script>
 /* ── CAROUSEL ────────────────────────────────────────────────────
-   Add, remove or reorder entries here — the slides, dots, arrows
-   and wrap-around all derive from this array, so any count works.
+   The slides live in the HTML above (so search engines and no-JS
+   visitors see them). Add or remove an <img class="shot"> with a
+   data-caption and the dots, arrows and wrap-around all follow.
    ─────────────────────────────────────────────────────────────── */
-const SHOTS = [
-  { src: 'assets/shots/home.jpg',     alt: 'Disconnect home screen listing active blocks',      caption: 'Disconnect — every block you have set, at a glance' },
-  { src: 'assets/shots/lock.jpg',     alt: 'Disconnect lock level picker',                      caption: 'Disconnect — pick how strict each block should be' },
-  { src: 'assets/shots/approval.jpg', alt: 'Disconnect buddy approval request',                 caption: 'Disconnect — on a hard lock, only your buddy can let you back in' }
-];
-
 (function () {
   const stack = document.getElementById('stack');
   const dots = document.getElementById('dots');
   const cap = document.getElementById('caption');
   const region = document.getElementById('carousel');
-  const n = SHOTS.length;
+  const slides = Array.prototype.slice.call(stack.querySelectorAll('.shot'));
+  const n = slides.length;
   let active = 0;
 
   if (!n) { region.hidden = true; return; }
 
-  SHOTS.forEach(function (s, i) {
-    const img = new Image();
-    img.className = 'shot';
-    img.src = s.src;
-    img.alt = s.alt;
-    img.loading = i === 0 ? 'eager' : 'lazy';
+  slides.forEach(function (img, i) {
     img.addEventListener('click', function () { go(i); });
-    stack.appendChild(img);
-
     const b = document.createElement('button');
     b.type = 'button';
     b.className = 'dot';
@@ -311,7 +411,6 @@ const SHOTS = [
   function go(i) { active = ((i % n) + n) % n; render(); }
 
   function render() {
-    const slides = stack.querySelectorAll('.shot');
     slides.forEach(function (el, i) {
       const d = (i - active + n) % n;
       el.classList.remove('is-active', 'is-next', 'is-prev');
@@ -324,7 +423,7 @@ const SHOTS = [
       el.classList.toggle('is-on', i === active);
       el.setAttribute('aria-current', i === active ? 'true' : 'false');
     });
-    cap.textContent = SHOTS[active].caption;
+    cap.innerHTML = slides[active].dataset.caption || '';
   }
 
   document.getElementById('prev').addEventListener('click', function () { go(active - 1); });
