@@ -1,232 +1,341 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shuaib's indiehacking page</title>
-  <style>
-    body {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f4f4f4;
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
-    header {
-      background-color: #333;
-      color: #fff;
-      text-align: center;
-      padding: 1em;
-    }
+<title>Shuaib Khan — Independent iOS Developer</title>
+<meta name="description" content="I design and build iOS apps that do one thing, and do it properly. Three of them are on the App Store: Disconnect, Trailblazer and Battery Alarm.">
+<link rel="canonical" href="https://bytehood.com/">
 
-    section {
-      display: flex;
-      flex-wrap: wrap;
-      padding: 2em;
-    }
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Bytehood">
+<meta property="og:url" content="https://bytehood.com/">
+<meta property="og:title" content="Shuaib Khan — Independent iOS Developer">
+<meta property="og:description" content="I design and build iOS apps that do one thing, and do it properly. Three of them are on the App Store.">
+<meta property="og:image" content="https://bytehood.com/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Shuaib Khan — iOS apps that earn a place on your home screen.">
 
-    aside {
-      width: 25%;
-      padding: 1em;
-      border-radius: 10px;
-      text-align: center;
-    }
+<meta name="twitter:card" content="summary_large_image">
 
-    #profile-pic {
-      border-radius: 50%;
-      width: 80px;
-      height: 80px;
-      object-fit: cover;
-      margin-bottom: 1em;
-    }
+<meta name="theme-color" content="#06060A">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
-    #profile-name {
-      font-size: 1.2em;
-      font-weight: bold;
-      margin-bottom: 1em;
-    }
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap">
 
-    #bio {
-      margin-top: 1em;
-      margin-bottom: 1em;
-    }
+<style>
+/* ──────────────────────────────────────────────────────────────
+   bytehood.com — Shuaib Khan
+   To add an app: copy one <a class="card"> block below and change
+   the four strings. To change the carousel: edit the SHOTS array
+   at the bottom of this file — any number of screenshots works.
+   ────────────────────────────────────────────────────────────── */
+:root{
+  --bg:#06060A; --ink:#F4F3FA; --muted:#ADA9C0; --dim:#8E8AA6;
+  --violet:#C4B5FD; --line:rgba(255,255,255,.10);
+  --maxw:1120px; --pad:clamp(20px,5vw,80px);
+  --sw:250px;   /* carousel slide width  */
+  --fan:178px;  /* how far the side slides sit from centre */
+  --font:Sora,"Helvetica Neue",Helvetica,system-ui,sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{color-scheme:dark;scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--font); color:var(--ink); background:var(--bg); line-height:1.5;
+  -webkit-font-smoothing:antialiased; overflow-x:hidden; position:relative;
+  background-image:
+    radial-gradient(760px 520px at 14% 2%,  rgba(124,58,237,.50), transparent 62%),
+    radial-gradient(680px 480px at 88% 12%, rgba(14,165,233,.38), transparent 62%),
+    radial-gradient(700px 560px at 62% 52%, rgba(236,72,153,.26), transparent 64%),
+    radial-gradient(900px 600px at 30% 96%, rgba(45,212,191,.16), transparent 66%);
+  background-attachment:fixed;
+}
+body::after{ /* film grain */
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:0; opacity:.055;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+img{max-width:100%;display:block}
+a{color:var(--violet);text-decoration:none}
+a:hover{color:#E9E3FF}
+:focus-visible{outline:2px solid var(--violet);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:var(--pad);top:14px;z-index:99;padding:10px 18px;border-radius:20px;background:var(--ink);color:#0B0A14}
 
-   #location {
-      font-style: italic;
-      color: #555;
-      display: flex;
-      justify-content: center;
-      align-content: center;
-    }
+.wrap{position:relative;z-index:1;max-width:var(--maxw);margin:0 auto;padding:0 var(--pad)}
 
-    #location svg {
-      margin-right: 0.5em; /* Adjust spacing between icon and text */
-      fill: #555; /* Set icon color */
-    }
+/* ── header ── */
+.top{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:28px 0;flex-wrap:wrap}
+.me{display:flex;align-items:center;gap:12px;font-size:15px;font-weight:600;letter-spacing:-.01em;color:var(--ink)}
+.me img{width:34px;height:34px;border-radius:50%;object-fit:cover;border:1px solid rgba(255,255,255,.22)}
+.nav{display:flex;align-items:center;gap:clamp(16px,3vw,30px);font-size:14.5px}
+.nav a{color:var(--muted)}
+.nav a:hover{color:var(--ink)}
+.nav .btn{padding:10px 20px;border-radius:22px;background:rgba(255,255,255,.10);border:1px solid rgba(255,255,255,.16);color:var(--ink)}
 
+/* ── hero ── */
+.hero{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:40px;align-items:center;padding:clamp(32px,5vw,54px) 0 16px}
+.chip{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;padding:8px 16px 8px 12px;border-radius:20px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);font-size:13px;color:#C9C5DC}
+.live{width:7px;height:7px;border-radius:50%;background:#34D399;box-shadow:0 0 0 4px rgba(52,211,153,.18);flex:none}
+.intro{display:flex;flex-direction:column;gap:26px}
+h1{
+  font-size:clamp(38px,5.4vw,70px);font-weight:700;line-height:1.04;letter-spacing:-.037em;text-wrap:balance;
+  background:linear-gradient(178deg,#FFF 8%,#EDE8FF 44%,#BFAEF8 82%,#96B9F2 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.lede{font-size:clamp(17px,1.7vw,19.5px);line-height:1.6;color:var(--muted);max-width:46ch;text-wrap:pretty}
+.actions{display:flex;flex-wrap:wrap;gap:14px;padding-top:6px}
+.cta{display:flex;align-items:center;height:52px;padding:0 28px;border-radius:26px;font-size:15.5px;font-weight:600}
+.cta.solid{background:var(--ink);color:#0B0A14}
+.cta.solid:hover{background:#fff;color:#0B0A14}
+.cta.ghost{background:rgba(255,255,255,.045);border:1px solid var(--line);color:var(--ink);font-weight:500;backdrop-filter:blur(18px)}
+.cta.ghost:hover{background:rgba(255,255,255,.09);color:var(--ink)}
 
-    #social-links {
-      display: flex;
-      justify-content: center;
-      padding: 1em;
-    }
+/* ── screenshot carousel ── */
+.shots{display:flex;flex-direction:column;align-items:center;gap:24px}
+.stack{position:relative;width:100%;height:calc(var(--sw)*2.168 + 40px);animation:drift 8s ease-in-out infinite}
+@keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-13px)}}
+.glow{position:absolute;left:50%;top:48%;width:min(500px,110%);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(167,139,250,.42),transparent 66%);filter:blur(22px)}
+.shot{
+  position:absolute;left:50%;top:20px;width:var(--sw);margin-left:calc(var(--sw)/-2);
+  border-radius:calc(var(--sw)*.128);border:7px solid #16161D;cursor:pointer;
+  box-shadow:0 40px 90px rgba(0,0,0,.62),0 0 0 1px rgba(255,255,255,.09);
+  opacity:0;pointer-events:none;transform:scale(.6);z-index:1;
+  transition:transform .55s cubic-bezier(.22,.68,.36,1),opacity .45s ease;
+}
+.shot.is-active{transform:translateX(0) scale(1) rotate(0);opacity:1;z-index:3;pointer-events:auto;cursor:default}
+.shot.is-next{transform:translateX(var(--fan)) scale(.74) rotate(7deg);opacity:.55;z-index:2;pointer-events:auto}
+.shot.is-prev{transform:translateX(calc(var(--fan)*-1)) scale(.74) rotate(-7deg);opacity:.55;z-index:2;pointer-events:auto}
+.shot.is-next:hover,.shot.is-prev:hover{opacity:.88}
+.caption{font-size:15px;color:#C9C5DC;text-align:center;min-height:1.5em;max-width:38ch;text-wrap:pretty}
+.controls{display:flex;align-items:center;gap:18px}
+.arrow{display:flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;cursor:pointer;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.13);color:#DAD6EC;transition:background .18s,border-color .18s}
+.arrow:hover{background:rgba(255,255,255,.13);border-color:rgba(196,181,253,.45)}
+.dots{display:flex;align-items:center;gap:8px}
+.dot{width:8px;height:8px;padding:0;border:0;border-radius:4px;background:rgba(255,255,255,.26);cursor:pointer;transition:width .35s,background .35s}
+.dot.is-on{width:26px;background:var(--violet)}
 
-    #social-links a {
-      text-decoration: none;
-      color: #333;
-      font-size: 1.5em;
-      padding: 10px;
-    }
+/* ── work ── */
+.rule{display:flex;align-items:center;gap:18px;padding:clamp(34px,5vw,44px) 0 22px}
+.rule h2{font-size:12.5px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;color:var(--dim)}
+.rule span{flex:1;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.16),transparent)}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.card{
+  display:flex;flex-direction:column;gap:18px;padding:28px;border-radius:22px;color:var(--ink);
+  background:rgba(255,255,255,.045);border:1px solid var(--line);backdrop-filter:blur(18px);
+  transition:transform .22s,border-color .22s,background .22s;
+}
+.card:hover{transform:translateY(-5px);border-color:rgba(196,181,253,.42);background:rgba(255,255,255,.075);color:var(--ink)}
+.card img{width:72px;height:72px;border-radius:17px;box-shadow:0 14px 32px rgba(0,0,0,.48)}
+.card h3{font-size:20px;font-weight:600;letter-spacing:-.016em}
+.card p{font-size:14.5px;line-height:1.52;color:#A5A1BA;text-wrap:pretty}
+.card .go{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:500;color:var(--violet);margin-top:auto}
 
-    main {
-      flex: 1;
-      padding: 1em;
-    }
+/* ── footer ── */
+.foot{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:30px 0 40px;margin-top:clamp(40px,6vw,58px);border-top:1px solid rgba(255,255,255,.09);font-size:13.5px;color:var(--dim)}
+.foot nav{display:flex;gap:clamp(16px,3vw,26px)}
 
-    .project-container {
-      display: flex;
-      gap: 1em;
-      flex-wrap: wrap;
-      justify-content: space-between;
-    }
-
-    .project {
-      display: flex; /* Added flex display */
-      width: calc(48% - 0.5em);
-      background-color: #fff;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: transform 0.2s;
-      cursor: pointer;
-      display: flex;
-      flex-direction: row; /* Changed to row */
-      text-decoration: none;
-      color: #333;
-      margin-bottom: 1em;
-    }
-
-    .project:hover {
-      transform: scale(1.05);
-    }
-
-    .project img {
-      width: 30px;
-      height: 30px;
-      object-fit: cover;
-      border-radius: 10px 10px 10px 10px;
-      border: 1px solid #000;
-    }
-
-    .project-details {
-      padding: 1em;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .project-icon {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      vertical-align: middle;
-      padding: 0.5em;
-    }
-
-    .project h3 {
-      margin-top: 0;
-      margin-bottom: 0.5em;
-    }
-
-    .project p {
-      margin: 0;
-    }
-
-    footer {
-      background-color: #333;
-      color: #fff;
-      text-align: center;
-      padding: 1em;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-    }
-
-    @media (max-width: 600px) {
-      section {
-        flex-direction: column;
-      }
-
-      aside {
-        width: 100%;
-      }
-
-      .project {
-        width: calc(100% - 1em);
-        margin-right: 0;
-      }
-    }
-  </style>
+@media (max-width:1040px){
+  :root{--fan:150px}
+  .hero{grid-template-columns:1fr;gap:clamp(30px,6vw,48px)}
+  .intro{align-items:flex-start}
+  .lede{max-width:60ch}
+}
+@media (max-width:720px){
+  :root{--sw:216px;--fan:118px}
+  .cards{grid-template-columns:1fr}
+  .nav a:not(.btn){display:none}
+}
+@media (max-width:480px){
+  :root{--sw:190px;--fan:92px}
+  .actions{flex-direction:column;align-items:stretch}
+  .cta{justify-content:center}
+  .foot{flex-direction:column;align-items:flex-start;gap:14px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .stack{animation:none}
+  .shot,.card,.dot,.arrow{transition:none}
+}
+</style>
 </head>
+
 <body>
-  <section>
-    <aside>
-      <img id="profile-pic" src="shuaib.jpg" alt="Shuaib's Profile Photo">
-      <div id="profile-name">Shuaib Khan</div>
-      <div id="location">
-        <!-- SVG Path -->
-        <svg width="20" height="24" fill="currentColor"><path fill-rule="evenodd" d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z" clip-rule="evenodd"></path></svg>
-        <!-- Location Text -->
-        <span>London, U. K.</span>
-      </div>
-      
-      <div id="social-links">
-        <a href="mailto:shuaib@bytehood.com" target="_blank" rel="noopener noreferrer">
-           <svg width="24" height="24">
-         <path d="M18.821,20.5H5.179A3.683,3.683,0,0,1,1.5,16.821V7.179A3.683,3.683,0,0,1,5.179,3.5H18.821A3.683,3.683,0,0,1,22.5,7.179v9.642A3.683,3.683,0,0,1,18.821,20.5ZM5.179,4.5A2.682,2.682,0,0,0,2.5,7.179v9.642A2.682,2.682,0,0,0,5.179,19.5H18.821A2.682,2.682,0,0,0,21.5,16.821V7.179A2.682,2.682,0,0,0,18.821,4.5Z"></path><path d="M12,14.209a.5.5,0,0,1-.346-.138L4.286,7.028a.5.5,0,0,1,.691-.723L12,13.018l7.023-6.713a.5.5,0,1,1,.691.723l-7.368,7.043A.5.5,0,0,1,12,14.209Z"></path><path d="M4.7,17.833a.5.5,0,0,1-.347-.86l5.54-5.31a.5.5,0,0,1,.692.722L5.048,17.694A.5.5,0,0,1,4.7,17.833Z"></path><path d="M19.3,17.832a.5.5,0,0,1-.346-.139l-5.538-5.308a.5.5,0,0,1,.692-.722l5.538,5.308a.5.5,0,0,1-.346.861Z"></path></svg>
-        </a>
+<a class="skip" href="#work">Skip to the apps</a>
 
-      </div>
-    </aside>
+<div class="wrap">
 
-    <main>
-      <div class="project-container">
-        <a class="project" href="https://apps.apple.com/gb/app/a-step-a-day/id6468681996" target="_blank" rel="noopener noreferrer">
-        <div class="project-icon">
-          <img src="AStepADay-60.png" alt="A Step A Day">
+  <header class="top">
+    <a class="me" href="/">
+      <img src="assets/photo.jpg" width="34" height="34" alt="">
+      <span>Shuaib Khan</span>
+    </a>
+    <nav class="nav">
+      <a href="#work">Work</a>
+      <!-- Social links: add back when you want them, e.g.
+      <a href="https://github.com/YOUR-HANDLE" rel="me noopener">GitHub</a>
+      <a href="https://x.com/YOUR-HANDLE" rel="me noopener">X</a>
+      -->
+      <a class="btn" href="mailto:shuaib@bytehood.com">Get in touch</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="intro">
+        <!-- Status pill: uncomment to show what you're working on. Keep it current or drop it.
+        <p class="chip"><span class="live" aria-hidden="true"></span> Currently building Disconnect</p>
+        -->
+        <h1>iOS apps that earn a place on your home screen.</h1>
+        <p class="lede">I&rsquo;m Shuaib &mdash; an independent developer in London. I design, build and ship every one of my apps end to end. Three of them are on the App Store.</p>
+        <div class="actions">
+          <a class="cta solid" href="#work">See the apps</a>
+          <a class="cta ghost" href="mailto:shuaib@bytehood.com">Email me</a>
         </div>
-          <div class="project-details">
-            <h3>A Step A Day</h3>
-            <p>Create habits using streaks.</p>
-          </div>
-        </a>
-
-        <a class="project" href="https://apps.apple.com/gb/app/tweetai/id6471381750" target="_blank" rel="noopener noreferrer">
-          <div class="project-icon">
-          <img src="TweetAI-60.png" alt="TweetAI">
-        </div>
-          <div class="project-details">
-            <h3>TweetAI</h3>
-            <p>Let ChatGPT write your tweets for you.</p>
-          </div>
-        </a>
-
- <a class="project" href="https://apps.apple.com/us/app/battery-alarm-app/id6472619156" target="_blank" rel="noopener noreferrer">
-          <div class="project-icon">
-          <img src="BatteryAlarm-60.png" alt="Battery Alarm App">
-        </div>
-          <div class="project-details">
-            <h3>Battery Alarm App</h3>
-            <p>Charge your iPhone battery optimally</p>
-          </div>
-        </a>
-
       </div>
-    </main>
-  </section>
 
-  <footer>
-    &copy; 2024 Bytehood Ltd. All rights reserved.
+      <div class="shots" id="carousel" role="group" tabindex="0"
+           aria-roledescription="carousel" aria-label="Disconnect screenshots">
+        <div class="stack" id="stack"><div class="glow" aria-hidden="true"></div></div>
+        <p class="caption" id="caption" aria-live="polite"></p>
+        <div class="controls" id="controls">
+          <button class="arrow" type="button" id="prev" aria-label="Previous screenshot">
+            <svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4l-6 6 6 6"/></svg>
+          </button>
+          <div class="dots" id="dots"></div>
+          <button class="arrow" type="button" id="next" aria-label="Next screenshot">
+            <svg width="17" height="17" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <div class="rule" id="work"><h2>On the App Store</h2><span></span></div>
+
+    <!-- ── APP CARDS · copy a block to add one ───────────────── -->
+    <section class="cards">
+
+      <a class="card" href="https://apps.apple.com/app/id6743134572" rel="noopener">
+        <img src="assets/icons/disconnect.png" width="72" height="72" alt="Disconnect app icon" loading="lazy">
+        <div>
+          <h3>Disconnect</h3>
+          <p>Block distracting apps. Hand the key to a friend.</p>
+        </div>
+        <span class="go">App Store
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 14L14 6M14 6H7.5M14 6v6.5"/></svg>
+        </span>
+      </a>
+
+      <a class="card" href="https://apps.apple.com/app/id6468681996" rel="noopener">
+        <img src="assets/icons/trailblazer.png" width="72" height="72" alt="Trailblazer app icon" loading="lazy">
+        <div>
+          <h3>Trailblazer</h3>
+          <p>Build habits with streaks that stick.</p>
+        </div>
+        <span class="go">App Store
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 14L14 6M14 6H7.5M14 6v6.5"/></svg>
+        </span>
+      </a>
+
+      <a class="card" href="https://apps.apple.com/app/id6472619156" rel="noopener">
+        <img src="assets/icons/battery.png" width="72" height="72" alt="Battery Alarm app icon" loading="lazy">
+        <div>
+          <h3>Battery Alarm</h3>
+          <p>Charge to exactly the right level.</p>
+        </div>
+        <span class="go">App Store
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 14L14 6M14 6H7.5M14 6v6.5"/></svg>
+        </span>
+      </a>
+
+    </section>
+  </main>
+
+  <footer class="foot">
+    <span>&copy; 2026 Bytehood Ltd &middot; London, UK</span>
+    <nav>
+      <a href="mailto:shuaib@bytehood.com">Email</a>
+      <!-- Social links: add back when you want them, e.g.
+      <a href="https://github.com/YOUR-HANDLE" rel="me noopener">GitHub</a>
+      <a href="https://x.com/YOUR-HANDLE" rel="me noopener">X</a>
+      -->
+      <a href="app-store-privacy-policy.html">Privacy</a>
+    </nav>
   </footer>
+
+</div>
+
+<script>
+/* ── CAROUSEL ────────────────────────────────────────────────────
+   Add, remove or reorder entries here — the slides, dots, arrows
+   and wrap-around all derive from this array, so any count works.
+   ─────────────────────────────────────────────────────────────── */
+const SHOTS = [
+  { src: 'assets/shots/home.jpg',     alt: 'Disconnect home screen listing active blocks',      caption: 'Disconnect — every block you have set, at a glance' },
+  { src: 'assets/shots/lock.jpg',     alt: 'Disconnect lock level picker',                      caption: 'Disconnect — pick how strict each block should be' },
+  { src: 'assets/shots/approval.jpg', alt: 'Disconnect buddy approval request',                 caption: 'Disconnect — on a hard lock, only your buddy can let you back in' }
+];
+
+(function () {
+  const stack = document.getElementById('stack');
+  const dots = document.getElementById('dots');
+  const cap = document.getElementById('caption');
+  const region = document.getElementById('carousel');
+  const n = SHOTS.length;
+  let active = 0;
+
+  if (!n) { region.hidden = true; return; }
+
+  SHOTS.forEach(function (s, i) {
+    const img = new Image();
+    img.className = 'shot';
+    img.src = s.src;
+    img.alt = s.alt;
+    img.loading = i === 0 ? 'eager' : 'lazy';
+    img.addEventListener('click', function () { go(i); });
+    stack.appendChild(img);
+
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'dot';
+    b.setAttribute('aria-label', 'Show screenshot ' + (i + 1) + ' of ' + n);
+    b.addEventListener('click', function () { go(i); });
+    dots.appendChild(b);
+  });
+
+  document.getElementById('controls').hidden = n < 2;
+
+  function go(i) { active = ((i % n) + n) % n; render(); }
+
+  function render() {
+    const slides = stack.querySelectorAll('.shot');
+    slides.forEach(function (el, i) {
+      const d = (i - active + n) % n;
+      el.classList.remove('is-active', 'is-next', 'is-prev');
+      if (d === 0) el.classList.add('is-active');
+      else if (d === 1 && n > 1) el.classList.add('is-next');
+      else if (d === n - 1 && n > 2) el.classList.add('is-prev');
+      el.setAttribute('aria-hidden', d === 0 ? 'false' : 'true');
+    });
+    Array.prototype.forEach.call(dots.children, function (el, i) {
+      el.classList.toggle('is-on', i === active);
+      el.setAttribute('aria-current', i === active ? 'true' : 'false');
+    });
+    cap.textContent = SHOTS[active].caption;
+  }
+
+  document.getElementById('prev').addEventListener('click', function () { go(active - 1); });
+  document.getElementById('next').addEventListener('click', function () { go(active + 1); });
+  region.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowLeft') { e.preventDefault(); go(active - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); go(active + 1); }
+  });
+
+  render();
+})();
+</script>
 </body>
 </html>
